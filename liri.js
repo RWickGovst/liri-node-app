@@ -42,7 +42,7 @@ function userCommand(userInput, userQuery){
     }
 };
 userCommand (userInput, userQuery);
-
+// node liri.js concert-this <artist/band name here>
 function concertThis() {
     console.log("Getting the information you requested");
 
@@ -53,6 +53,9 @@ function concertThis() {
             if (userBand.length > 0){
                 for (var i=0; i < 1; i++){
                     console.log("Artist: ")
+// name of the venue
+// venue location
+// date of the event in MM/DD/YYYY
 
                 let concertDate = moment(userBand[i].datetime).format("MM/DD/YYYY hh:00 A");
                 console.log("Date and Time: " + $(concertDate));
@@ -64,6 +67,7 @@ function concertThis() {
         };
     };
 };
+// node liri.js spotify-this-song '<song name here>'
 function spotifyThisSong(){
     console.log("Getting the information you requested");
     if (!userQuery) {
@@ -76,11 +80,16 @@ function spotifyThisSong(){
     let spotifyArr = data.tracks.items;
 
     for (var i=0; i < spotifyArr.length; i++){
+// artist
+// song name
+// a preview link of the song from Spotify
+// the album that the song is from
         console.log("Artist: ")
     };
 });
 
 }
+// node liri.js movie-this '<movie name here>'
 function movieThis(){
     console.log("Getting the information you requested");
     if (!userQuery){userQuery = "mr nobody";
@@ -89,12 +98,25 @@ function movieThis(){
             axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(response){
         
             let userMovie = JSON.parse(body);
-console.log(userMovie);
+
+
+
+            console.log(userMovie);
         let ratingsArr = userMovie.userMovie.Ratings;
         if (ratingsArr.length > 2){
 
         }
         if (!error && response.statusCode === 200){
+    
+    // Title of the movie.
+    // Year the movie came out.
+    // IMDB Rating of the movie.
+    // Rotten Tomatoes Rating of the movie.
+    // Country where the movie was produced.
+    // Language of the movie.
+    // Plot of the movie.
+    // Actors in the movie.
+            
             console.log("Movie: $(userMovie.Title");
         }
             else{
@@ -116,6 +138,6 @@ userQuery = dataArr[1];
 userCommand(userInput, userQuery);
     });
 };
-`node liri.js concert-this <artist/band name here>`
-`node liri.js spotify-this-song '<song name here>'`
-`node liri.js movie-this '<movie name here>'`
+
+
+
