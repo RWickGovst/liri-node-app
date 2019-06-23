@@ -12,8 +12,9 @@ var fs = require("fs");
 var keys = require("./keys.js");
 
 ` Initialize spotify `
-var spotify = new Spotify(keys.spotify);
 var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify);
+
 
 ` omdb and bands in town API `
 let omdb = (keys.omdb);
@@ -46,7 +47,7 @@ userCommand (userInput, userQuery);
 function concertThis() {
     console.log("Getting the information you requested");
 
-    request("https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp"){
+    request("https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp",function(error,Response){
         if (!error && Response.statusCode === 200){
             let userBand = JSON.parse(body);
 
@@ -65,8 +66,9 @@ function concertThis() {
                 console.log("Information not found");
             };
         };
-    };
-};
+    })
+}
+        
 // node liri.js spotify-this-song '<song name here>'
 function spotifyThisSong(){
     console.log("Getting the information you requested");
@@ -78,13 +80,16 @@ function spotifyThisSong(){
         return console.log("Error occurred ");
     }
     let spotifyArr = data.tracks.items;
-
+// console.log(spotifyArr);
     for (var i=0; i < spotifyArr.length; i++){
 // artist
 // song name
 // a preview link of the song from Spotify
 // the album that the song is from
-        console.log("Artist: ")
+        console.log("Artist: "+JSON.stringify(spotifyArr[i].artists[0].name));
+        console.log("Song name: " +spotifyArr[i].name);
+        console.log("Song preview: "+spotifyArr[i].preview_url);
+        console.log("Album name: "+spotifyArr[i].album.name);
     };
 });
 
@@ -95,18 +100,17 @@ function movieThis(){
     if (!userQuery){userQuery = "mr nobody";
                 };
             var axios = require("axios");
-            axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(response){
+            axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(error,response,body){
+            console.log(response);
         
-            let userMovie = JSON.parse(body);
+        //     let userMovie = JSON.parse(body);
 
+        //     console.log(userMovie);
+        // let ratingsArr = userMovie.userMovie.Ratings;
+        // if (ratingsArr.length > 2){
 
-
-            console.log(userMovie);
-        let ratingsArr = userMovie.userMovie.Ratings;
-        if (ratingsArr.length > 2){
-
-        }
-        if (!error && response.statusCode === 200){
+        // }
+        // if (!error && response.statusCode === 200){
     
     // Title of the movie.
     // Year the movie came out.
@@ -117,14 +121,14 @@ function movieThis(){
     // Plot of the movie.
     // Actors in the movie.
             
-            console.log("Movie: $(userMovie.Title");
-        }
-            else{
-                console.log("Information not found");
-            };
+    //         console.log("Movie: $(userMovie.Title");
+    //     }
+    //         else{
+    //             console.log("Information not found");
+    //         };
     });
 };
-
+// node liri.js do-what-it-says
 function doThis() {
     fs.readFile("random.txt", "utf8", function (error, data){
 if (error) {
