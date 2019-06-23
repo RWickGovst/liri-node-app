@@ -40,7 +40,7 @@ function userCommand(userInput, userQuery){
             console.log("Please enter a valid command");
             break;
     }
-}
+};
 userCommand (userInput, userQuery);
 
 function concertThis() {
@@ -82,13 +82,40 @@ function spotifyThisSong(){
 
 }
 function movieThis(){
-    
+    console.log("Getting the information you requested");
+    if (!userQuery){userQuery = "mr nobody";
+                };
+            var axios = require("axios");
+            axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(response){
+        
+            let userMovie = JSON.parse(body);
+console.log(userMovie);
+        let ratingsArr = userMovie.userMovie.Ratings;
+        if (ratingsArr.length > 2){
+
+        }
+        if (!error && response.statusCode === 200){
+            console.log("Movie: $(userMovie.Title");
+        }
+            else{
+                console.log("Information not found");
+            };
+    });
+};
+
+function doThis() {
+    fs.readFile("random.txt", "utf8", function (error, data){
+if (error) {
+    return console.log(error);
 }
+let dataArr = data.split(",");
 
+userInput = dataArr[0];
+userQuery = dataArr[1];
 
+userCommand(userInput, userQuery);
+    });
+};
 `node liri.js concert-this <artist/band name here>`
-
-`"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"`
-
 `node liri.js spotify-this-song '<song name here>'`
 `node liri.js movie-this '<movie name here>'`
