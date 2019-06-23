@@ -1,12 +1,12 @@
 # liri-node-app
-liri node homework
+## liri node homework
 
 This liri app is supposed to take in a one of these pre-defined commands:
 
-'concert-this'
-'spotify-this-song'
-'movie-this'
-'do-what-it-says'
+* 'concert-this'
+* 'spotify-this-song'
+* 'movie-this'
+* 'do-what-it-says'
 
 The command is followed by search criteria
 
@@ -22,6 +22,6 @@ Data is displayed in the terminal
 
 Screen shot of the terminal:
 
-![Command in terminal](./assets/liriCommand.png)
+![Command in terminal](/assets/liriCommand.png)
 
 
