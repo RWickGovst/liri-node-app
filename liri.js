@@ -35,8 +35,11 @@ function userCommand(userInput, userQuery){
         case "movie-this":
             movieThis();
             break;
-        case "do-this":
+        case "do-what-it-says":
             doThis();
+            break;
+        case "commands":
+            showCommands();
             break;
         default:
             console.log("Please enter a valid command");
@@ -105,7 +108,7 @@ function movieThis(){
                 };
             // var axios = require("axios");
             axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(response){
-            // console.log(response);
+            console.log(response);
         
             //     let userMovie = JSON.parse(body);
 
@@ -116,7 +119,7 @@ function movieThis(){
         // IMDB Rating of the movie.
         console.log("IMDB Rating: " + response.data.imdbRating);
         // Rotten Tomatoes Rating of the movie.
-        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[2]);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0]);
         // Country where the movie was produced.
         console.log("Country: " + response.data.Country);
         // Language of the movie.
@@ -162,6 +165,12 @@ userQuery = dataArr[1];
 userCommand(userInput, userQuery);
     });
 };
-
+function showCommands() {
+    console.log("Available commands are: ");
+    console.log("concert-this");
+    console.log("spotify-this-song");
+    console.log("movie-this");
+    console.log("do-what-it-says");
+};
 
 
