@@ -15,6 +15,7 @@ var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 
+var axios = require("axios");
 
 ` omdb and bands in town API `
 let omdb = (keys.omdb);
@@ -34,7 +35,7 @@ function userCommand(userInput, userQuery){
         case "movie-this":
             movieThis();
             break;
-        case "do-what-it-says":
+        case "do-this":
             doThis();
             break;
         default:
@@ -53,10 +54,12 @@ function concertThis() {
 
             if (userBand.length > 0){
                 for (var i=0; i < 1; i++){
-                    console.log("Artist: ")
-// name of the venue
-// venue location
-// date of the event in MM/DD/YYYY
+                    // display the name of the venue
+                    console.log("Venue: ");
+                    // display the venue location
+                    console.log("Location: ");
+                    // display the date of the event in MM/DD/YYYY
+                    console.log("Event Date: ");
 
                 let concertDate = moment(userBand[i].datetime).format("MM/DD/YYYY hh:00 A");
                 console.log("Date and Time: " + $(concertDate));
@@ -82,13 +85,14 @@ function spotifyThisSong(){
     let spotifyArr = data.tracks.items;
 // console.log(spotifyArr);
     for (var i=0; i < spotifyArr.length; i++){
-// artist
-// song name
-// a preview link of the song from Spotify
-// the album that the song is from
+
+        // display artist
         console.log("Artist: "+JSON.stringify(spotifyArr[i].artists[0].name));
+        // display song name
         console.log("Song name: " +spotifyArr[i].name);
+        // display a preview link of the song from Spotify
         console.log("Song preview: "+spotifyArr[i].preview_url);
+        // display the album that the song is from
         console.log("Album name: "+spotifyArr[i].album.name);
     };
 });
@@ -99,35 +103,51 @@ function movieThis(){
     console.log("Getting the information you requested");
     if (!userQuery){userQuery = "mr nobody";
                 };
-            var axios = require("axios");
-            axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(error,response,body){
-            console.log(response);
+            // var axios = require("axios");
+            axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(response){
+            // console.log(response);
         
-        //     let userMovie = JSON.parse(body);
+            //     let userMovie = JSON.parse(body);
 
-        //     console.log(userMovie);
-        // let ratingsArr = userMovie.userMovie.Ratings;
-        // if (ratingsArr.length > 2){
-
-        // }
-        // if (!error && response.statusCode === 200){
+        // Title of the movie.
+        console.log("Movie: " + response.data.Title);
+        // Year the movie came out.
+        console.log("Released: " + response.data.Released);
+        // IMDB Rating of the movie.
+        console.log("IMDB Rating: " + response.data.imdbRating);
+        // Rotten Tomatoes Rating of the movie.
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[2]);
+        // Country where the movie was produced.
+        console.log("Country: " + response.data.Country);
+        // Language of the movie.
+        console.log("Language: " + response.data.Language);
+        // Plot of the movie.
+        console.log("Plot: " + response.data.Plot);
+        // Actors in the movie.
+        console.log("Actors: " + response.data.Actors);
+        
+            },   
     
-    // Title of the movie.
-    // Year the movie came out.
-    // IMDB Rating of the movie.
-    // Rotten Tomatoes Rating of the movie.
-    // Country where the movie was produced.
-    // Language of the movie.
-    // Plot of the movie.
-    // Actors in the movie.
-            
-    //         console.log("Movie: $(userMovie.Title");
-    //     }
-    //         else{
-    //             console.log("Information not found");
-    //         };
-    });
+    function(error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an object that comes back with details pertaining to the error that occurred.
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      }
+    );
 };
+
 // node liri.js do-what-it-says
 function doThis() {
     fs.readFile("random.txt", "utf8", function (error, data){
