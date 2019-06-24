@@ -52,10 +52,12 @@ function concertThis() {
     console.log("Getting the information you requested");
 
     request("https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp",function(error,Response){
-        if (!error && Response.statusCode === 200){
-            let userBand = JSON.parse(body);
-
-            if (userBand.length > 0){
+        // if (!error && Response.statusCode === 200){
+        //     let userBand = JSON.parse(body);
+        if (error) {
+            return console.log("Error occurred ");
+        }
+            if (userQuery.length > 0){
                 for (var i=0; i < 1; i++){
                     // display the name of the venue
                     console.log("Venue: ");
@@ -64,16 +66,16 @@ function concertThis() {
                     // display the date of the event in MM/DD/YYYY
                     console.log("Event Date: ");
 
-                let concertDate = moment(userBand[i].datetime).format("MM/DD/YYYY hh:00 A");
+                let concertDate = moment(userQuery[i].datetime).format("MM/DD/YYYY hh:00 A");
                 console.log("Date and Time: " + $(concertDate));
                 };
             } 
             else {
                 console.log("Information not found");
-            };
+            
         };
-    })
-}
+    });
+};
         
 // node liri.js spotify-this-song '<song name here>'
 function spotifyThisSong(){
@@ -108,7 +110,7 @@ function movieThis(){
                 };
             // var axios = require("axios");
             axios.get("http://www.omdbapi.com/?t=" + userQuery + "&apikey=1d86f0e6").then(function(response){
-            console.log(response);
+            // console.log(response);
         
             //     let userMovie = JSON.parse(body);
 
@@ -119,7 +121,7 @@ function movieThis(){
         // IMDB Rating of the movie.
         console.log("IMDB Rating: " + response.data.imdbRating);
         // Rotten Tomatoes Rating of the movie.
-        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0]);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
         // Country where the movie was produced.
         console.log("Country: " + response.data.Country);
         // Language of the movie.
