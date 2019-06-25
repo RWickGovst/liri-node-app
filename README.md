@@ -29,7 +29,7 @@ Screen shot of a succesful request:
 ![Successful request](/assets/movie-this.png)
 
 Screencastify video:
-![Screencastify](https://chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/c889d8de-f313-4908-y532-8f4a3880b7f0)
+![Screencastify](https://drive.google.com/file/d/1Vbq-ES9asGBGOqdqio9c-E0qby1Q0W1y/view)
 
 ## node.js
 ## axios 
