@@ -22,11 +22,14 @@ node liri.js (followed by a command and a search term)
 The request goes to either Spotify, IMDB, or bandsintown.com
 Data is displayed in the terminal
 
-Screen shot of the terminal:
-![Command in terminal](/assets/liriCommand.png)
+Screen shot of a succesful request:
+![Command in terminal](/assets/concert-this.png)
 
 Screen shot of a succesful request:
 ![Successful request](/assets/movie-this.png)
+
+Screen shot of a succesful request:
+![Successful request](/assets/spotify-this.png)
 
 Screencastify video:
 https://drive.google.com/file/d/1Vbq-ES9asGBGOqdqio9c-E0qby1Q0W1y/view
