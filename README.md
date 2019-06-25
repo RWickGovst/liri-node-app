@@ -26,7 +26,10 @@ Screen shot of the terminal:
 ![Command in terminal](/assets/liriCommand.png)
 
 Screen shot of a succesful request:
-![Successful request](/assets/.png)
+![Successful request](/assets/movie-this.png)
+
+Screencastify video:
+![Screencastify](https://chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/c889d8de-f313-4908-y532-8f4a3880b7f0)
 
 ## node.js
 ## axios 

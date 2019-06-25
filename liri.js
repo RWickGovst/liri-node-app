@@ -50,31 +50,28 @@ userCommand (userInput, userQuery);
 // node liri.js concert-this <artist/band name here>
 function concertThis() {
     console.log("Getting the information you requested");
-
-    request("https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp",function(error,Response){
-        // if (!error && Response.statusCode === 200){
-        //     let userBand = JSON.parse(body);
-        if (error) {
-            return console.log("Error occurred ");
-        }
-            if (userQuery.length > 0){
-                for (var i=0; i < 1; i++){
+    var artist = userQuery;
+    var bandQueryURL = ("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp");
+        
+        axios.get(bandQueryURL).then(
+        // console.log(response);    
+        function(response){
+        // if (userQuery.length > 0){
+                // for (var i=0; i < 1; i++){
                     // display the name of the venue
-                    console.log("Venue: ");
+                console.log("Venue: " + response.data[0].venue.name);
                     // display the venue location
-                    console.log("Location: ");
+                console.log("Location: " + response.data[0].venue.city);
                     // display the date of the event in MM/DD/YYYY
-                    console.log("Event Date: ");
+                console.log("Event Date: " + moment(response.data[0].datetime).format("MM-DD-YYYY"));
 
-                let concertDate = moment(userQuery[i].datetime).format("MM/DD/YYYY hh:00 A");
-                console.log("Date and Time: " + $(concertDate));
-                };
-            } 
-            else {
-                console.log("Information not found");
-            
-        };
-    });
+                // let concertDate = moment(userBand[i].datetime).format("MM/DD/YYYY hh:00 A");
+                // console.log("Date and Time: " + $(concertDate));
+                // };
+        
+        });
+        
+    
 };
         
 // node liri.js spotify-this-song '<song name here>'
